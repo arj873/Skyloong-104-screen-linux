@@ -1,23 +1,14 @@
-use rusb::{
-    ConfigDescriptor, DeviceDescriptor, DeviceHandle, DeviceList, EndpointDescriptor,
-    InterfaceDescriptor, Language, Result, Speed, UsbContext,
-};
-use std::time::Duration;
+use rusb::{DeviceList, Result };
 
 use usb_ids::{self, FromId};
 
-struct UsbDevice<T: UsbContext> {
-    handle: DeviceHandle<T>,
-    language: Language,
-    timeout: Duration,
-}
+
 
 fn main() {
     list_devices().unwrap();
 }
 
 fn list_devices() -> Result<()> {
-    let timeout = Duration::from_secs(1);
 
     for device in DeviceList::new()?.iter() {
         let device_desc = match device.device_descriptor() {
