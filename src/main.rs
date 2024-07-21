@@ -1,10 +1,21 @@
 use rusb::{DeviceList, Result };
 
 use usb_ids::{self, FromId};
+use std::env;
+use std::path::Path;
 
-
+use hex::encode;
+use std::fs::read;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+    println!("{}", &args[1]);
+    // println!("{}", );
+    if Path::new(&args[1]).exists() && &args[1].split(".").last().unwrap() == &"gif"{
+        let dump = encode(read(&args[1]).unwrap());
+        let mut chars = dump.chars();      
+
+    }
     list_devices().unwrap();
 }
 
